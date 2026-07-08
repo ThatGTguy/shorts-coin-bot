@@ -66,7 +66,6 @@ async def hello_slash(interaction: discord.Interaction):
         timestamp=datetime.utcnow()
     )
     embed.add_field(name="What I Do", value="I help the community log **leverage calls** (longs & shorts), track who’s actually profitable, and keep a clean leaderboard.", inline=False)
-    embed.add_field(name="Quick Commands", value="`/predict` • `/resolve` • `/stats` • `/leaderboard` • `/active`", inline=False)
     embed.set_footer(text="Have a wonderful day in these bear markets 🐻💪")
     await interaction.response.send_message(embed=embed)
 
