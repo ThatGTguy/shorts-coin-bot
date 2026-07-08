@@ -1,0 +1,41 @@
+**📌 How to use the Prediction Bot (Discord)**
+
+This bot lets everyone log their **leverage calls** and tracks who’s actually profitable with a transparent +1 / -1 scoring system.
+
+### Log a Prediction
+Use the slash command:
+```
+/predict asset direction entry_price leverage notes
+```
+
+**Examples:**
+- `/predict BTC short 98000 10`
+- `/predict ETH long 2450 5 "Breakout retest"`
+- `/predict SOL short 145 20 "Fakeout incoming"`
+
+The bot will post a nice embed with your call + a unique ID (e.g. **#42**).
+
+### Resolve / Close Your Call
+When the move plays out:
+```
+/resolve ID win     → successful (+1 to your score)
+/resolve ID loss    → didn’t work (-1 to your score)
+```
+
+**Example:** `/resolve 42 win`
+
+Only **you** or admins can resolve your calls.
+
+### Check Performance
+- `/stats` → Your personal wins, losses, score & win rate
+- `/leaderboard` → Top performers in the server
+- `/active` → See all open (unresolved) calls right now
+- `/help` → Quick reminder of commands
+
+### Quick Rules
+- Be honest when resolving your own calls
+- You can only resolve calls **you** posted (admins can help)
+- Use the notes field to explain your idea
+- Have fun and try to stay green on the leaderboard 🟢
+
+Need help? Just use `/help` or ask in the server.

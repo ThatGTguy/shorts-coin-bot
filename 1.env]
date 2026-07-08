@@ -1,0 +1,6 @@
+DISCORD_BOT_TOKEN=your_token_here
+
+ADMIN_USER_IDS=755867125410955306
+
+# Optional debug
+DEBUG=1
