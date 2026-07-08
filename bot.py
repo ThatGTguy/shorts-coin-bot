@@ -32,7 +32,9 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-BOT_COLOR = 0x8B0000  # Deep Bear Red
+BOT_COLOR = 0x8B0000
+SHORTS_EMOJI = "📉"
+BULL_EMOJI = "📈"
 
 
 def is_admin(user_id: int) -> bool:
@@ -44,15 +46,22 @@ async def on_ready():
     print(f"✅ Logged in as {bot.user}")
     await init_db()
     print("✅ Database ready")
+    
+    # FORCE SYNC TO YOUR SERVER
     try:
-        synced = await bot.tree.sync()
-        print(f"✅ Synced {len(synced)} commands")
+        guild = discord.Object(id=1513362879250956288)
+        synced = await bot.tree.sync(guild=guild)
+        print(f"✅ Successfully synced {len(synced)} slash commands to your server")
     except Exception as e:
-        print(f"Sync error: {e}")
+        print(f"⚠️ Guild sync failed: {e}")
+        try:
+            synced = await bot.tree.sync()
+            print(f"✅ Global sync: {len(synced)} commands")
+        except Exception as e2:
+            print(f"❌ Sync failed: {e2}")
 
 
-# ==================== NEW HELLO COMMAND ====================
-
+# ==================== HELLO COMMAND ====================
 @bot.tree.command(name="hello", description="Greet the Shorts Coin Bear")
 async def hello_slash(interaction: discord.Interaction):
     embed = discord.Embed(
@@ -72,9 +81,13 @@ async def hello_slash(interaction: discord.Interaction):
         inline=False
     )
     embed.set_footer(text="Have a wonderful day in these bear markets 🐻💪")
-    
     await interaction.response.send_message(embed=embed)
 
+if __name__ == "__main__":
+    if not TOKEN:
+        print("❌ DISCORD_BOT_TOKEN not found in .env!")
+    else:
+        bot.run(TOKEN)
 
 # ==================== EXISTING COMMANDS (unchanged) ====================
 
