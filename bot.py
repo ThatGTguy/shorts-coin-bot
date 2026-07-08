@@ -170,6 +170,28 @@ async def active_slash(interaction: discord.Interaction):
         )
     await interaction.followup.send(embed=embed)
 
+# ==================== GOOD MORNING LISTENER ====================
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+
+    content = message.content.lower().strip()
+    is_gm = any(greeting in content for greeting in ["gm", "good morning", "gm "])
+    bot_mentioned = bot.user.mentioned_in(message)
+
+    if is_gm and bot_mentioned:
+        embed = discord.Embed(
+            title="🐻 GM Trader!",
+            description="Rise and grind! Another day to hunt in these bear markets 🔥\n\nHope you're loaded with conviction today.",
+            color=0x8B0000,
+            timestamp=datetime.utcnow()
+        )
+        embed.set_footer(text="Shorts Coin • Let's make it a green day")
+        await message.reply(embed=embed, mention_author=True)
+        return
+
+    await bot.process_commands(message)
 
 if __name__ == "__main__":
     if not TOKEN:
