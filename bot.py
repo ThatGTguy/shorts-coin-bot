@@ -74,7 +74,6 @@ async def hello_slash(interaction: discord.Interaction):
 @bot.tree.command(name="predict", description="Log a new leverage prediction call")
 @app_commands.describe(asset="Asset", direction="Direction", entry_price="Entry price", leverage="Leverage", notes="Notes")
 @app_commands.choices(direction=[
-    app_commands.Choice(name="Long 📈", value="long"),
     app_commands.Choice(name="Short 📉", value="short")
 ])
 async def predict_slash(interaction: discord.Interaction, asset: str, direction: Literal["long", "short"], entry_price: float, leverage: Optional[int] = 1, notes: Optional[str] = None):
